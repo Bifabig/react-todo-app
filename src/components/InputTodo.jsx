@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { useTodosContext } from '@/context/TodosContext';
 
-const InputTodo = ({ addTodoItem }) => {
+const InputTodo = () => {
+  const { addTodoItem } = useTodosContext();
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
 
@@ -21,17 +24,38 @@ const InputTodo = ({ addTodoItem }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-container">
         <input
           type="text"
           placeholder="Add Todo..."
           value={title}
           onChange={handleChange}
+          className="input-text"
         />
-        <button>Submit</button>
+        <button className="input-submit">
+          <FaPlusCircle />
+        </button>
       </form>
-      <span>{message}</span>
+      <span className="submit-warning">{message}</span>
     </>
   );
 };
 export default InputTodo;
+
+{
+  /* ---If you want to use multiple icons side by side---
+
+   <IconContext.Provider
+  value={{
+    color: "darkcyan",
+    style: { fontSize: "20px", color: "#ff0000" },
+    className: "submit-iconn",
+  }}
+>
+  <button className="input-submit">
+    <FaPlusCircle />
+    <FaPlusCircle />
+    <FaPlusCircle />
+  </button>
+</IconContext.Provider> */
+}
